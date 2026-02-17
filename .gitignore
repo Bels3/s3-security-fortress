@@ -1,0 +1,230 @@
+# S3 Security Fortress - .gitignore
+# Terraform Files
+# State files contain sensitive data
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+
+# Terraform directory caches
+.terraform/
+.terraform.lock.hcl
+
+# Crash log files
+crash.log
+crash.*.log
+
+# Variable files that may contain secrets
+*.tfvars
+!terraform.tfvars.example
+*.tfvars.json
+!terraform.tfvars.json.example
+
+# Override files (used for local development)
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Terraform plan output files
+*.tfplan
+tfplan
+
+# AWS & Credentials
+.aws/
+*.pem
+*.key
+*.crt
+credentials
+config
+
+# AWS SAM
+.aws-sam/
+
+# Python (Lambda functions)
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Virtual environments
+.venv
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+
+# Node.js (if using JavaScript Lambdas)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+
+# Go (Terratest)
+
+*.test
+*.out
+go.sum
+vendor/
+
+
+# IDEs & Editors
+
+# VSCode
+.vscode/
+*.code-workspace
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+.\#*
+
+
+# OS Files
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+
+
+# Logs & Temporary Files
+
+*.log
+logs/
+*.tmp
+*.temp
+tmp/
+temp/
+
+
+# Documentation Build Artifacts
+
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+
+
+# Test Coverage & Reports
+
+coverage/
+*.cover
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.pytest_cache/
+.hypothesis/
+
+
+# Security Scan Results
+
+
+tfsec-results.json
+checkov-results.json
+trivy-results.json
+security-scan-results/
+
+
+# Cost Estimation
+
+infracost-report.json
+cost-estimate.json
+
+
+# Backup Files
+
+*.bak
+*.backup
+*.old
+
+
+# Archive Files (don't version binaries)
+
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.rar
+*.7z
+
+
+# Lambda Deployment Packages
+
+lambda-packages/
+*.zip
+deployment-package.zip
+
+
+# Environment-specific Files
+
+.env
+.env.local
+.env.*.local
+secrets/
+private/
+
+
+# CI/CD Artifacts
+
+.gitlab-ci-local/
+.github-actions-local/
+
+
+
+
+
+

@@ -1,0 +1,32 @@
+{
+  "encryption_enabled": {
+    "sensitive": false,
+    "type": "string",
+    "value": "Bucket is encrypted with KMS key: alias/dev-s3-key"
+  },
+  "kms_key_alias": {
+    "sensitive": false,
+    "type": "string",
+    "value": "alias/dev-s3-key"
+  },
+  "kms_key_arn": {
+    "sensitive": false,
+    "type": "string",
+    "value": "arn:aws:kms:us-east-1:378898160669:key/28667174-a8d9-4914-9e0b-b1bcd5d70366"
+  },
+  "kms_key_id": {
+    "sensitive": false,
+    "type": "string",
+    "value": "28667174-a8d9-4914-9e0b-b1bcd5d70366"
+  },
+  "test_bucket_arn": {
+    "sensitive": false,
+    "type": "string",
+    "value": "arn:aws:s3:::dev-kms-test-bucket-378898160669"
+  },
+  "test_bucket_name": {
+    "sensitive": false,
+    "type": "string",
+    "value": "dev-kms-test-bucket-378898160669"
+  }
+}

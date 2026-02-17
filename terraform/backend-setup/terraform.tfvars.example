@@ -1,0 +1,6 @@
+# Example configuration:
+# aws_region              = "us-east-1"
+# state_bucket_name       = "my-company-terraform-state"  # Change this to be unique!
+# lock_table_name         = "terraform-state-lock"
+# state_file_retention_days = 90
+# log_retention_days      = 90

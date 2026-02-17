@@ -1,0 +1,57 @@
+{
+  "advanced_bucket_arn": {
+    "sensitive": false,
+    "type": "string",
+    "value": "arn:aws:s3:::dev-advanced-data-378898160669"
+  },
+  "advanced_bucket_name": {
+    "sensitive": false,
+    "type": "string",
+    "value": "dev-advanced-data-378898160669"
+  },
+  "basic_bucket_arn": {
+    "sensitive": false,
+    "type": "string",
+    "value": "arn:aws:s3:::dev-basic-data-378898160669"
+  },
+  "basic_bucket_name": {
+    "sensitive": false,
+    "type": "string",
+    "value": "dev-basic-data-378898160669"
+  },
+  "cors_bucket_name": {
+    "sensitive": false,
+    "type": "string",
+    "value": "dev-api-uploads-378898160669"
+  },
+  "deployment_summary": {
+    "sensitive": false,
+    "type": "string",
+    "value": "Deployment Summary\n    \nKMS Key:\n- ID: c6cc43ab-670f-4f01-b3fd-fb64006226a8\n- Alias: alias/dev-s3-key\n- Rotation: Enabled\n    \nBuckets Created:\n1. Basic Bucket: dev-basic-data-378898160669\n   - Encryption: KMS\n   - Versioning: Enabled\n   - Logging: Enabled\n    \n2. Advanced Bucket: dev-advanced-data-378898160669\n   - Encryption: KMS\n   - Versioning: Enabled\n   - Logging: Enabled\n   - Lifecycle: 4 transitions\n   - Monitoring: Enabled\n    \n3. CORS Bucket: dev-api-uploads-378898160669\n   - Encryption: KMS\n   - CORS: Enabled\n   - Versioning: Enabled\n    \n4. Logging Bucket: dev-basic-data-378898160669-logs\n   - Purpose: Store access logs\n   - Retention: 90 days\n    \nTest Files Uploaded:\n- Basic: s3://dev-basic-data-378898160669/test-files/test-file.txt\n- Advanced: s3://dev-advanced-data-378898160669/test-files/test-file.txt\n    \nNext Steps:\n1. Verify encryption: aws s3api head-object --bucket dev-basic-data-378898160669 --key test-files/test-file.txt\n2. Check versioning: aws s3api list-object-versions --bucket dev-basic-data-378898160669\n3. View metrics: AWS Console → S3 → Metrics\n4. Check logs: s3://dev-basic-data-378898160669-logs/\n"
+  },
+  "kms_key_alias": {
+    "sensitive": false,
+    "type": "string",
+    "value": "alias/dev-s3-key"
+  },
+  "kms_key_arn": {
+    "sensitive": false,
+    "type": "string",
+    "value": "arn:aws:kms:us-east-1:378898160669:key/c6cc43ab-670f-4f01-b3fd-fb64006226a8"
+  },
+  "kms_key_id": {
+    "sensitive": false,
+    "type": "string",
+    "value": "c6cc43ab-670f-4f01-b3fd-fb64006226a8"
+  },
+  "logging_bucket_name": {
+    "sensitive": false,
+    "type": "string",
+    "value": "dev-basic-data-378898160669-logs"
+  },
+  "test_file_url": {
+    "sensitive": false,
+    "type": "string",
+    "value": "s3://dev-basic-data-378898160669/test-files/test-file.txt"
+  }
+}

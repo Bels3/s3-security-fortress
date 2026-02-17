@@ -1,0 +1,57 @@
+{
+  "admin_access_point_arn": {
+    "sensitive": false,
+    "type": "string",
+    "value": "arn:aws:s3:us-east-1:378898160669:accesspoint/dev-admin-ap"
+  },
+  "application_access_point_arn": {
+    "sensitive": false,
+    "type": "string",
+    "value": "arn:aws:s3:us-east-1:378898160669:accesspoint/dev-application-ap"
+  },
+  "application_role_arn": {
+    "sensitive": false,
+    "type": "string",
+    "value": "arn:aws:iam::378898160669:role/dev-application-ap-user-role"
+  },
+  "bucket_arn": {
+    "sensitive": false,
+    "type": "string",
+    "value": "arn:aws:s3:::dev-multi-access-data-378898160669"
+  },
+  "bucket_name": {
+    "sensitive": false,
+    "type": "string",
+    "value": "dev-multi-access-data-378898160669"
+  },
+  "deployment_summary": {
+    "sensitive": false,
+    "type": "string",
+    "value": "    \nDeployment Summary - Access Points\n    \nS3 Bucket:\n- Name: dev-multi-access-data-378898160669\n- Encryption: KMS\n- Versioning: Enabled\n    \nAccess Points Created:\n    \n1. Read-Only Access Point\n   - ARN: arn:aws:s3:us-east-1:378898160669:accesspoint/dev-readonly-downloads-ap\n   - Alias: dev-readonly-downloa-8fpgxke5kfcp7j9653ud7wkho7y3kuse1b-s3alias\n   - Permissions: GetObject, ListBucket\n   - Network: Public Internet (with SSL)\n   - Use Case: Public downloads\n    \n2. Upload Access Point\n   - ARN: arn:aws:s3:us-east-1:378898160669:accesspoint/dev-uploads-ap\n   - Alias: dev-uploads-ap-jtupoayqedqgnqb6ghrpx65uibqmouse1a-s3alias\n   - Permissions: PutObject\n   - Network: IP Restricted\n   - Use Case: User uploads from office\n    \n3. Admin Access Point\n   - ARN: arn:aws:s3:us-east-1:378898160669:accesspoint/dev-admin-ap\n   - Alias: dev-admin-ap-3snmd5q76t5p5zcu4athnqt16a38huse1a-s3alias\n   - Permissions: Full (s3:*)\n   - Network: Authenticated only\n   - Use Case: Administrative access\n    \n4. Application Access Point\n   - ARN: arn:aws:s3:us-east-1:378898160669:accesspoint/dev-application-ap\n   - Alias: dev-application-ap-6ya6i75pzewrjgstsqjn4ief8tbk1use1a-s3alias\n   - Permissions: Read/Write\n   - IAM Role: arn:aws:iam::378898160669:role/dev-application-ap-user-role\n   - Use Case: EC2 application access\n    \nTest Files Created:\n- public/readme.txt (via read-only AP)\n- uploads/test-upload.txt (via upload AP)\n    \nArchitecture:\n    \n┌────────────────────────────────────────┐\n│          S3 Bucket                     │\n│    (dev-multi-access-data-378898160669)   │\n└─────────────┬──────────────────────────┘\n              │\n      ┌───────┼───────────┬───────────┐\n      │       │           │           │\n┌────▼─┐   ┌──▼───┐ ┌───▼────┐ ┌──▼─────┐\n│Read-  │  │Upload│  │Admin   │  │App     │\n│Only   │  │AP    │  │AP      │  │AP      │\n│AP     │  │      │  │        │  │        │\n└───────┘  └──────┘  └────────┘  └────────┘\n(Public)   (IP Restr)(Auth Only) (IAM Role)\n    \nNext Steps:\n1. Test access points with provided commands\n2. Update your diagram in eraser.io\n3. Verify monitoring in CloudWatch\n4. Check access point policies\n    \n"
+  },
+  "readonly_access_point_alias": {
+    "sensitive": false,
+    "type": "string",
+    "value": "dev-readonly-downloa-8fpgxke5kfcp7j9653ud7wkho7y3kuse1b-s3alias"
+  },
+  "readonly_access_point_arn": {
+    "sensitive": false,
+    "type": "string",
+    "value": "arn:aws:s3:us-east-1:378898160669:accesspoint/dev-readonly-downloads-ap"
+  },
+  "test_commands": {
+    "sensitive": false,
+    "type": "string",
+    "value": "    \nTest Commands\n    \n# List files via read-only access point\naws s3 ls s3://dev-readonly-downloa-8fpgxke5kfcp7j9653ud7wkho7y3kuse1b-s3alias/\n    \n# Download file via read-only access point\naws s3 cp s3://dev-readonly-downloa-8fpgxke5kfcp7j9653ud7wkho7y3kuse1b-s3alias/public/readme.txt ./\n    \n# Upload file via upload access point\necho \"test\" \u003e upload-test.txt\naws s3 cp upload-test.txt s3://dev-uploads-ap-jtupoayqedqgnqb6ghrpx65uibqmouse1a-s3alias/uploads/\n    \n# List all access points\naws s3control list-access-points --account-id 378898160669\n    \n# Get access point policy\naws s3control get-access-point-policy \\\n  --account-id 378898160669 \\\n  --name 378898160669:dev-readonly-downloads-ap\n    \n"
+  },
+  "upload_access_point_alias": {
+    "sensitive": false,
+    "type": "string",
+    "value": "dev-uploads-ap-jtupoayqedqgnqb6ghrpx65uibqmouse1a-s3alias"
+  },
+  "upload_access_point_arn": {
+    "sensitive": false,
+    "type": "string",
+    "value": "arn:aws:s3:us-east-1:378898160669:accesspoint/dev-uploads-ap"
+  }
+}

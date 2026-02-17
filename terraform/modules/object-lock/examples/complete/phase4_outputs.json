@@ -1,0 +1,61 @@
+{
+  "audit_logs_bucket_name": {
+    "sensitive": false,
+    "type": "string",
+    "value": "dev-audit-logs-locked-378898160669"
+  },
+  "compliance_bucket_details": {
+    "sensitive": false,
+    "type": [
+      "object",
+      {
+        "bucket_arn": "string",
+        "compliance_level": "string",
+        "object_lock_mode": "string",
+        "retention_period": "string"
+      }
+    ],
+    "value": {
+      "bucket_arn": "arn:aws:s3:::dev-compliance-records-locked-378898160669",
+      "compliance_level": "SEC17a-4",
+      "object_lock_mode": "COMPLIANCE",
+      "retention_period": "7 years"
+    }
+  },
+  "compliance_bucket_name": {
+    "sensitive": false,
+    "type": "string",
+    "value": "dev-compliance-records-locked-378898160669"
+  },
+  "deployment_summary": {
+    "sensitive": false,
+    "type": "string",
+    "value": "    \nObject Lock Deployment Summary\n    \nKMS Key:\n- ID: 4ca2470d-3ae6-45f5-a006-db7f6b463519\n- ARN: arn:aws:kms:us-east-1:378898160669:key/4ca2470d-3ae6-45f5-a006-db7f6b463519\n- Rotation: Enabled\n    \nBuckets Created:\n    \n1. GOVERNANCE MODE BUCKET\n   Name: dev-governance-test-locked-378898160669\n   Mode: GOVERNANCE\n   Retention: 30 days\n   Can bypass: Yes (with permission)\n   Use case: Testing, internal policies\n   Test file: test/governance-test.txt\n    \n2. COMPLIANCE MODE BUCKET\n   Name: dev-compliance-records-locked-378898160669\n   Mode: COMPLIANCE\n   Retention: 7 years\n   Can bypass: NO (immutable)\n   Compliance: SEC 17a-4\n   Use case: Financial records\n   Test file: records/2024/compliance-record.txt\n       \n   ⚠️  CANNOT delete this bucket until 2031!\n    \n3. AUDIT LOGS BUCKET\n   Name: dev-audit-logs-locked-378898160669\n   Mode: COMPLIANCE\n   Retention: 90 days\n   Compliance: SOC 2\n   Use case: Audit trails\n   Test file: logs/2024-02-11/app.log\n    \nKey Differences:\n    \nGovernance vs Compliance:\n┌──────────────┬─────────────┬─────────────┐\n│ Feature      │ Governance  │ Compliance  │\n├──────────────┼─────────────┼─────────────┤\n│ Can delete?  │ With perm   │ Never       │\n│ Can bypass?  │ Yes         │ No          │\n│ Root can?    │ Yes         │ No          │\n│ Use case     │ Testing     │ Regulatory  │\n└──────────────┴─────────────┴─────────────┘\n    \nSecurity Features:\n✓ KMS encryption on all buckets\n✓ Versioning enabled (required for Object Lock)\n✓ Public access blocked\n✓ Access logging enabled\n✓ CloudWatch monitoring\n✓ Daily inventory reports\n✓ SSL/TLS enforced\n    \nCost Estimate:\n- KMS Key: $1.00/month\n- Storage: $0.023/GB/month (transitions to Glacier)\n- Monitoring: ~$0.50/month\n- Total: ~$1.50-$3/month + storage\n    \nImportant Notes:\n⚠️  Object Lock CANNOT be disabled after creation\n⚠️  Compliance mode objects CANNOT be deleted\n⚠️  Retention can be extended but not reduced\n⚠️  Storage costs accumulate (cannot delete)\n    \nNext Steps:\n1. Test governance mode (can bypass)\n2. Test compliance mode (cannot bypass)\n3. Add legal hold to objects\n4. Review inventory reports\n5. Update your eraser.io diagram\n    \n========================================\n"
+  },
+  "governance_bucket_details": {
+    "sensitive": false,
+    "type": [
+      "object",
+      {
+        "bucket_arn": "string",
+        "object_lock_mode": "string",
+        "retention_period": "string"
+      }
+    ],
+    "value": {
+      "bucket_arn": "arn:aws:s3:::dev-governance-test-locked-378898160669",
+      "object_lock_mode": "GOVERNANCE",
+      "retention_period": "30 days"
+    }
+  },
+  "governance_bucket_name": {
+    "sensitive": false,
+    "type": "string",
+    "value": "dev-governance-test-locked-378898160669"
+  },
+  "test_commands": {
+    "sensitive": false,
+    "type": "string",
+    "value": "    \nObject Lock Test Commands\n    \nGOVERNANCE MODE TESTS:\n---------------------\n    \n# 1. Try to delete (should fail)\naws s3 rm s3://dev-governance-test-locked-378898160669/test/governance-test.txt\n    \n# 2. Delete with bypass (should work if you have permission)\naws s3api delete-object \\\n  --bucket dev-governance-test-locked-378898160669 \\\n  --key test/governance-test.txt \\\n  --bypass-governance-retention\n    \n# 3. Check object lock status\naws s3api head-object \\\n  --bucket dev-governance-test-locked-378898160669 \\\n  --key test/governance-test.txt\n    \n    \nCOMPLIANCE MODE TESTS:\n---------------------\n    \n# 1. Try to delete (should fail)\naws s3 rm s3://dev-compliance-records-locked-378898160669/records/2024/compliance-record.txt\n    \n# 2. Try with bypass (should STILL fail - compliance cannot be bypassed)\naws s3api delete-object \\\n  --bucket dev-compliance-records-locked-378898160669 \\\n  --key records/2024/compliance-record.txt \\\n  --bypass-governance-retention\n    \n# 3. Check retention date\naws s3api head-object \\\n  --bucket dev-compliance-records-locked-378898160669 \\\n  --key records/2024/compliance-record.txt \\\n  --query 'ObjectLockRetainUntilDate'\n    \n# 4. Try to extend retention (should work)\naws s3api put-object-retention \\\n  --bucket dev-compliance-records-locked-378898160669 \\\n  --key records/2024/compliance-record.txt \\\n  --retention Mode=COMPLIANCE,RetainUntilDate=$(date -u -d '+8 years' +%Y-%m-%dT%H:%M:%SZ)\n    \n    \nAUDIT LOGS TESTS:\n----------------\n    \n# 1. View object details\naws s3api head-object \\\n  --bucket dev-audit-logs-locked-378898160669 \\\n  --key logs/2024-02-11/app.log\n    \n# 2. Try to delete (should fail until retention expires)\naws s3 rm s3://dev-audit-logs-locked-378898160669/logs/2024-02-11/app.log\n    \n    \nLEGAL HOLD TESTS:\n----------------\n    \n# 1. Add legal hold to governance object\naws s3api put-object-legal-hold \\\n  --bucket dev-governance-test-locked-378898160669 \\\n  --key test/governance-test.txt \\\n  --legal-hold Status=ON\n    \n# 2. Check legal hold status\naws s3api get-object-legal-hold \\\n  --bucket dev-governance-test-locked-378898160669 \\\n  --key test/governance-test.txt\n    \n# 3. Remove legal hold (when appropriate)\naws s3api put-object-legal-hold \\\n  --bucket dev-governance-test-locked-378898160669 \\\n  --key test/governance-test.txt \\\n  --legal-hold Status=OFF\n    \n    \nINVENTORY REPORTS:\n-----------------\n    \n# Check inventory configuration\naws s3api list-bucket-inventory-configurations \\\n  --bucket dev-compliance-records-locked-378898160669\n    \n# View inventory files (after 24-48 hours)\naws s3 ls s3://dev-compliance-records-locked-378898160669/inventory/\n    \n========================================\n"
+  }
+}

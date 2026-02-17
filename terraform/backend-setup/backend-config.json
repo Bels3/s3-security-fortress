@@ -1,0 +1,50 @@
+{
+  "backend_config": {
+    "sensitive": false,
+    "type": [
+      "object",
+      {
+        "bucket": "string",
+        "dynamodb_table": "string",
+        "encrypt": "bool",
+        "region": "string"
+      }
+    ],
+    "value": {
+      "bucket": "s3-fortress-state",
+      "dynamodb_table": "s3-fortress-locks",
+      "encrypt": true,
+      "region": "us-east-1"
+    }
+  },
+  "backend_policy_arn": {
+    "sensitive": false,
+    "type": "string",
+    "value": "arn:aws:iam::378898160669:policy/TerraformBackendAccess"
+  },
+  "lock_table_arn": {
+    "sensitive": false,
+    "type": "string",
+    "value": "arn:aws:dynamodb:us-east-1:378898160669:table/s3-fortress-locks"
+  },
+  "lock_table_name": {
+    "sensitive": false,
+    "type": "string",
+    "value": "s3-fortress-locks"
+  },
+  "next_steps": {
+    "sensitive": false,
+    "type": "string",
+    "value": "    \n✅ Backend Setup Complete!\n    \nAdd this to your Terraform configurations:\n    \nterraform {\n  backend \"s3\" {\n    bucket         = \"s3-fortress-state\"\n    key            = \"environments/ENV_NAME/terraform.tfstate\"\n    region         = \"us-east-1\"\n    dynamodb_table = \"s3-fortress-locks\"\n    encrypt        = true\n  }\n}\n    \nReplace ENV_NAME with: dev, staging, or prod\n    \nNext: Deploy your first secure S3 bucket!\ncd terraform/environments/dev\nterraform init\nterraform plan\n    \n"
+  },
+  "state_bucket_arn": {
+    "sensitive": false,
+    "type": "string",
+    "value": "arn:aws:s3:::s3-fortress-state"
+  },
+  "state_bucket_name": {
+    "sensitive": false,
+    "type": "string",
+    "value": "s3-fortress-state"
+  }
+}

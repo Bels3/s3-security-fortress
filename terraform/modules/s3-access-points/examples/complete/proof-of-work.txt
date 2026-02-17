@@ -1,0 +1,5 @@
+Completed 5 Bytes/5 Bytes (0 Bytes/s) with 1 file(s) remainingupload failed: ./test.txt to s3://dev-admin-ap-3snmd5q76t5p5zcu4athnqt16a38huse1a-s3alias/admin/test.txt An error occurred (AccessDenied) when calling the PutObject operation: User: arn:aws:iam::378898160669:user/terraform-admin is not authorized to perform: s3:PutObject on resource: "arn:aws:s3:::dev-multi-access-data-378898160669/admin/test.txt" with an explicit deny in a resource-based policy
+Completed 5 Bytes/5 Bytes (2 Bytes/s) with 1 file(s) remainingupload: ./test.txt to s3://dev-uploads-ap-jtupoayqedqgnqb6ghrpx65uibqmouse1a-s3alias/uploads/test-success.txt
+{
+    "Policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"DenyUnencryptedUploads\",\"Effect\":\"Deny\",\"Principal\":\"*\",\"Action\":\"s3:PutObject\",\"Resource\":\"arn:aws:s3:us-east-1:378898160669:accesspoint/dev-readonly-downloads-ap/object/*\",\"Condition\":{\"StringNotEquals\":{\"s3:x-amz-server-side-encryption\":[\"aws:kms\",\"AES256\"]}}}]}"
+}

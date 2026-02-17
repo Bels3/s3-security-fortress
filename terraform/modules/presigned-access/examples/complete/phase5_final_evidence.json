@@ -1,0 +1,13 @@
+{
+    "AcceptRanges": "bytes",
+    "LastModified": "2026-02-15T06:27:41+00:00",
+    "ContentLength": 16,
+    "ETag": "\"f2ec82b665f1160fd547180714d4ae1a\"",
+    "VersionId": "BnDupSYY4cjkn8lKHElXtJehfAqdYMhY",
+    "ContentType": "text/plain",
+    "ServerSideEncryption": "aws:kms",
+    "Metadata": {
+        "phase": "5-comprehensive-test"
+    },
+    "SSEKMSKeyId": "arn:aws:kms:us-east-1:378898160669:key/732714a9-ff02-43d5-8e0b-1949c030cc9c"
+}
