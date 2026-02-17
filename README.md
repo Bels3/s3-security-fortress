@@ -5,7 +5,6 @@
 [![Terraform](https://img.shields.io/badge/Terraform-1.6+-purple?logo=terraform)](https://www.terraform.io/)
 [![AWS](https://img.shields.io/badge/AWS-S3%20%7C%20KMS%20%7C%20CloudTrail-orange?logo=amazon-aws)](https://aws.amazon.com/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
 ## 📋 Table of Contents
 - [Overview](#overview)
@@ -223,7 +222,6 @@ terraform apply
   --expiration 3600
 ```
 
-**[📖 View All Examples](examples/README.md)**
 ## 🧪 Testing
 ### **Run All Tests**
 ```bash
