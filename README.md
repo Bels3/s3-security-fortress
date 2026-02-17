@@ -251,10 +251,6 @@ go test -v -timeout 30m
 make validate
 ```
 
-**[📖 Testing Documentation](tests/README.md)**
-
----
-
 ## 📊 Compliance
 
 This project maps security controls to major compliance frameworks:
@@ -279,8 +275,6 @@ This project maps security controls to major compliance frameworks:
 
 **Estimated Dev Environment: $1-2/month**
 **Estimated Prod Environment: $5-15/month** (depending on usage)
-
-**[📊 Detailed Cost Analysis](docs/cost-estimation.md)**
 
 ## 🤝 Contributing
 
