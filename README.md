@@ -294,18 +294,6 @@ We use the following prefixes to keep our audit trail clear:
 4. refactor: Code changes that neither fix bugs nor add features.
 5. chore: Maintenance tasks (e.g., updating .gitignore).
 
-## 📚 Documentation
-
-| Document | Description |
-|----------|-------------|
-| [Architecture Overview](docs/architecture/overview.md) | High-level system design |
-| [Security Controls](docs/security-controls/controls-matrix.md) | Complete security controls |
-| [Deployment Guide](docs/runbooks/deployment.md) | Step-by-step deployment |
-| [Troubleshooting](docs/runbooks/troubleshooting.md) | Common issues and solutions |
-| [API Documentation](docs/api/presigned-urls.md) | Presigned URL API reference |
-| [ADRs](docs/architecture/adr/) | Architecture decisions |
-
----
 
 ## 📝 License
 
