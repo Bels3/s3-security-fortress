@@ -253,12 +253,13 @@ make validate
 
 This project maps security controls to major compliance frameworks:
 
-| Framework | Coverage     | Documentation                                                  |
-|-----------|--------------|----------------------------------------------------------------|
-| **SOC 2** | ✅ Type II   | [View Mapping](docs/security-controls/compliance/SOC2.md)      |
-| **HIPAA** | ✅ Security Rule | [View Mapping](docs/security-controls/compliance/HIPAA.md) |
-| **PCI-DSS** | ✅ v3.2.1  | [View Mapping](docs/security-controls/compliance/PCI-DSS.md)   |
-| **GDPR** | ✅ Article 32 | [View Mapping](docs/security-controls/compliance/GDPR.md)      |
+| Framework | Requirement             | Documentation                                          |
+|-----------|-------------------------|--------------------------------------------------------|
+| **GDPR**  | Art. 32 (Encryption)    | Enforced via KMS SSE-KMS in `modules/secure-s3-bucket` |
+| **HIPAA** | §164.312 (Access)       | Restricted via IAM Roles & SigV4 in `modules/presigned-access` |
+| **SOC 2** | CC7.2 (Monitoring)      |  CloudWatch Alarms & Config Rules in `modules/monitoring-compliance` |
+| **PCI-DSS** | Req. 3.4 (Protection) | Object Lock & Versioning in `modules/object-lock` |
+
 
 ## 💰 Cost Estimation
 ### **Monthly Cost Breakdown (Single Environment)**
