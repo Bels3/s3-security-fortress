@@ -1,8 +1,8 @@
- #Required Variables
+#Required Variables
 variable "environment" {
   description = "Environment name (dev, staging, prod)"
   type        = string
-  
+
   validation {
     condition     = contains(["dev", "staging", "prod"], var.environment)
     error_message = "Environment must be dev, staging, or prod"
@@ -33,7 +33,7 @@ variable "force_destroy" {
 variable "object_lock_mode" {
   description = "Object lock mode: GOVERNANCE or COMPLIANCE"
   type        = string
-  
+
   validation {
     condition     = contains(["GOVERNANCE", "COMPLIANCE"], var.object_lock_mode)
     error_message = "Object lock mode must be GOVERNANCE or COMPLIANCE"
@@ -44,7 +44,7 @@ variable "retention_days" {
   description = "Retention period in days (use this OR retention_years, not both)"
   type        = number
   default     = null
-  
+
   validation {
     condition     = var.retention_days == null || (var.retention_days >= 1 && var.retention_days <= 36500)
     error_message = "Retention days must be between 1 and 36500 (100 years)"
@@ -55,7 +55,7 @@ variable "retention_years" {
   description = "Retention period in years (use this OR retention_days, not both)"
   type        = number
   default     = null
-  
+
   validation {
     condition     = var.retention_years == null || (var.retention_years >= 1 && var.retention_years <= 100)
     error_message = "Retention years must be between 1 and 100"
@@ -127,7 +127,7 @@ variable "enable_access_logging" {
 variable "logging_retention_days" {
   description = "Number of days to retain access logs"
   type        = number
-  default     = 2555  # 7 years (common compliance requirement)
+  default     = 2555 # 7 years (common compliance requirement)
 }
 
 # Lifecycle
@@ -135,10 +135,10 @@ variable "logging_retention_days" {
 variable "lifecycle_rules" {
   description = "Lifecycle rules (only apply after retention period expires)"
   type = list(object({
-    id                                     = string
-    enabled                                = bool
-    expiration_days                        = optional(number)
-    noncurrent_version_expiration_days     = optional(number)
+    id                                 = string
+    enabled                            = bool
+    expiration_days                    = optional(number)
+    noncurrent_version_expiration_days = optional(number)
     transitions = optional(list(object({
       days          = number
       storage_class = string
@@ -181,7 +181,7 @@ variable "inventory_frequency" {
   description = "Inventory frequency (Daily or Weekly)"
   type        = string
   default     = "Daily"
-  
+
   validation {
     condition     = contains(["Daily", "Weekly"], var.inventory_frequency)
     error_message = "Inventory frequency must be Daily or Weekly"

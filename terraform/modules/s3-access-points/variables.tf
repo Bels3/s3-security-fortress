@@ -8,7 +8,7 @@ variable "bucket_name" {
 variable "environment" {
   description = "Environment name (dev, staging, prod)"
   type        = string
-  
+
   validation {
     condition     = contains(["dev", "staging", "prod"], var.environment)
     error_message = "Environment must be dev, staging, or prod"
@@ -26,7 +26,7 @@ variable "access_point_name" {
   description = "Name of the access point (if empty, will be auto-generated)"
   type        = string
   default     = ""
-  
+
   validation {
     condition = var.access_point_name == "" || (
       length(var.access_point_name) >= 3 &&
@@ -97,7 +97,7 @@ variable "allowed_principals" {
   description = "List of IAM principal ARNs allowed to use this access point"
   type        = list(string)
   default     = []
-  
+
   validation {
     condition = alltrue([
       for arn in var.allowed_principals : can(regex("^arn:aws:iam::", arn))

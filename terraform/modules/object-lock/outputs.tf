@@ -42,7 +42,7 @@ output "compliance_level" {
 
 output "retention_period" {
   description = "The retention period"
-  value = var.retention_days != null ? "${var.retention_days} days" : "${var.retention_years} years"
+  value       = var.retention_days != null ? "${var.retention_days} days" : "${var.retention_years} years"
 }
 
 output "logging_bucket_arn" {

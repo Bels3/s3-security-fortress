@@ -50,7 +50,7 @@ output "test_file_url" {
 
 output "deployment_summary" {
   description = "Summary of deployed resources"
-  value = <<-EOT
+  value       = <<-EOT
     Deployment Summary
     
     KMS Key:

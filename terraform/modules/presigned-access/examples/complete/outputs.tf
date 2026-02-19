@@ -25,13 +25,13 @@ output "download_lambda_name" {
 }
 
 output "bucket_name" {
-  value = var.bucket_name
+  value       = var.bucket_name
   description = "The name of the S3 bucket used for testing"
 }
 
 output "test_commands" {
   description = "Commands to test the API"
-  value = <<-EOT
+  value       = <<-EOT
     
     ========================================
     Test Commands

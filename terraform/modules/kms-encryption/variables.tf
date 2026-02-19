@@ -1,7 +1,7 @@
 variable "environment" {
   description = "Environment name (dev, staging, prod)"
   type        = string
-  
+
   validation {
     condition     = contains(["dev", "staging", "prod"], var.environment)
     error_message = "Environment must be dev, staging, or prod"
@@ -11,7 +11,7 @@ variable "environment" {
 variable "purpose" {
   description = "Purpose of the KMS key (e.g., s3, rds, secrets)"
   type        = string
-  
+
   validation {
     condition     = length(var.purpose) > 0 && length(var.purpose) <= 50
     error_message = "Purpose must be between 1 and 50 characters"
@@ -35,7 +35,7 @@ variable "key_alias" {
   description = "Alias for the KMS key (if empty, will be generated)"
   type        = string
   default     = ""
-  
+
   validation {
     condition     = var.key_alias == "" || can(regex("^alias/", var.key_alias))
     error_message = "Key alias must start with 'alias/' or be empty"
@@ -53,7 +53,7 @@ variable "deletion_window_in_days" {
   description = "Waiting period before key deletion (7-30 days)"
   type        = number
   default     = 30
-  
+
   validation {
     condition     = var.deletion_window_in_days >= 7 && var.deletion_window_in_days <= 30
     error_message = "Deletion window must be between 7 and 30 days"
@@ -72,7 +72,7 @@ variable "key_administrators" {
   description = "List of IAM ARNs that can administer the key"
   type        = list(string)
   default     = []
-  
+
   validation {
     condition = alltrue([
       for arn in var.key_administrators : can(regex("^arn:aws:iam::", arn))
@@ -85,7 +85,7 @@ variable "key_users" {
   description = "List of IAM ARNs that can use the key"
   type        = list(string)
   default     = []
-  
+
   validation {
     condition = alltrue([
       for arn in var.key_users : can(regex("^arn:aws:iam::", arn))

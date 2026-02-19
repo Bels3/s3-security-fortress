@@ -8,6 +8,11 @@ variable "bucket_name" {
   type        = string
 }
 
+variable "aws_region" {
+  type        = string
+  description = "The AWS region where resources are deployed"
+}
+
 variable "kms_key_id" {
   description = "KMS key ID for encryption (optional)"
   type        = string
@@ -17,13 +22,13 @@ variable "kms_key_id" {
 variable "upload_expiration_seconds" {
   description = "Upload URL expiration time in seconds"
   type        = number
-  default     = 300  # 5 minutes
+  default     = 300 # 5 minutes
 }
 
 variable "download_expiration_seconds" {
   description = "Download URL expiration time in seconds"
   type        = number
-  default     = 300  # 5 minutes
+  default     = 300 # 5 minutes
 }
 
 variable "max_upload_size_mb" {

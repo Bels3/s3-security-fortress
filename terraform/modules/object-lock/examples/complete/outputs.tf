@@ -34,7 +34,7 @@ output "audit_logs_bucket_name" {
 
 output "test_commands" {
   description = "Commands to test object lock"
-  value = <<-EOT
+  value       = <<-EOT
     
     Object Lock Test Commands
     
@@ -130,7 +130,7 @@ output "test_commands" {
 
 output "deployment_summary" {
   description = "Summary of deployed resources"
-  value = <<-EOT
+  value       = <<-EOT
     
     Object Lock Deployment Summary
     

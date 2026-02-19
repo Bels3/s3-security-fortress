@@ -1,7 +1,7 @@
 variable "environment" {
   description = "Environment name (dev, staging, prod)"
   type        = string
-  
+
   validation {
     condition     = contains(["dev", "staging", "prod"], var.environment)
     error_message = "Environment must be dev, staging, or prod"
@@ -11,7 +11,7 @@ variable "environment" {
 variable "purpose" {
   description = "Purpose of the bucket (e.g., data, backups, logs)"
   type        = string
-  
+
   validation {
     condition     = length(var.purpose) > 0 && length(var.purpose) <= 50
     error_message = "Purpose must be between 1 and 50 characters"
@@ -23,7 +23,7 @@ variable "bucket_name" {
   description = "Name of the S3 bucket (if empty, will be auto-generated)"
   type        = string
   default     = ""
-  
+
   validation {
     condition = var.bucket_name == "" || (
       length(var.bucket_name) >= 3 &&
@@ -45,7 +45,7 @@ variable "security_level" {
   description = "Security level (standard, high, critical)"
   type        = string
   default     = "high"
-  
+
   validation {
     condition     = contains(["standard", "high", "critical"], var.security_level)
     error_message = "Security level must be standard, high, or critical"
@@ -56,7 +56,7 @@ variable "data_classification" {
   description = "Data classification (public, internal, confidential, restricted)"
   type        = string
   default     = "confidential"
-  
+
   validation {
     condition = contains(
       ["public", "internal", "confidential", "restricted"],
@@ -189,7 +189,7 @@ variable "logging_retention_days" {
   description = "Number of days to retain access logs"
   type        = number
   default     = 90
-  
+
   validation {
     condition     = var.logging_retention_days >= 1 && var.logging_retention_days <= 365
     error_message = "Logging retention must be between 1 and 365 days"
@@ -239,7 +239,7 @@ variable "replication_storage_class" {
   description = "Storage class for replicated objects"
   type        = string
   default     = "STANDARD"
-  
+
   validation {
     condition = contains(
       ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"],
@@ -260,7 +260,7 @@ variable "object_ownership" {
   description = "Object ownership setting"
   type        = string
   default     = "BucketOwnerEnforced"
-  
+
   validation {
     condition = contains(
       ["BucketOwnerPreferred", "ObjectWriter", "BucketOwnerEnforced"],
@@ -287,7 +287,7 @@ variable "inventory_frequency" {
   description = "Inventory frequency (Daily or Weekly)"
   type        = string
   default     = "Weekly"
-  
+
   validation {
     condition     = contains(["Daily", "Weekly"], var.inventory_frequency)
     error_message = "Inventory frequency must be Daily or Weekly"

@@ -1,5 +1,4 @@
-#variables.tf
-
+# variables.tf
 variable "aws_region" {
   description = "AWS region"
   type        = string
@@ -12,10 +11,8 @@ variable "environment" {
   default     = "dev"
 }
 
-variable "office_ip_ranges" {
-  description = "Office IP ranges for upload access point"
+variable "alert_emails" {
+  description = "Email addresses for alerts"
   type        = list(string)
-  default = [
-    "0.0.0.0/0" # Replace with your actual office IPs in production
-  ]
+  default     = []
 }

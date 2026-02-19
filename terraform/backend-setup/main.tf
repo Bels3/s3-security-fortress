@@ -1,7 +1,7 @@
 # This creates the S3 bucket and DynamoDB table for Terraform state management
 terraform {
   required_version = ">= 1.6.0"
-  
+
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -86,7 +86,10 @@ resource "aws_s3_bucket_lifecycle_configuration" "terraform_state" {
     status = "Enabled"
 
     noncurrent_version_expiration {
-      noncurrent_days = 90  # Keep old versions for 90 days
+      noncurrent_days = 90 # Keep old versions for 90 days
+    }
+    abort_incomplete_multipart_upload {
+      days_after_initiation = 7
     }
   }
 
@@ -96,7 +99,10 @@ resource "aws_s3_bucket_lifecycle_configuration" "terraform_state" {
 
     noncurrent_version_transition {
       noncurrent_days = 30
-      storage_class   = "STANDARD_IA"  # Move to cheaper storage after 30 days
+      storage_class   = "STANDARD_IA" # Move to cheaper storage after 30 days
+    }
+    abort_incomplete_multipart_upload {
+      days_after_initiation = 7
     }
   }
 }
@@ -152,7 +158,10 @@ resource "aws_s3_bucket_lifecycle_configuration" "terraform_state_logs" {
     status = "Enabled"
 
     expiration {
-      days = 90  # Keep logs for 90 days
+      days = 90 # Keep logs for 90 days
+    }
+    abort_incomplete_multipart_upload {
+      days_after_initiation = 7
     }
   }
 
@@ -169,14 +178,17 @@ resource "aws_s3_bucket_lifecycle_configuration" "terraform_state_logs" {
       days          = 60
       storage_class = "GLACIER"
     }
+    abort_incomplete_multipart_upload {
+      days_after_initiation = 7
+    }
   }
 }
 
 # DynamoDB Table for State Locking
 resource "aws_dynamodb_table" "terraform_state_lock" {
-  name           = var.lock_table_name
-  billing_mode   = "PAY_PER_REQUEST"  # No need to provision capacity
-  hash_key       = "LockID"
+  name         = var.lock_table_name
+  billing_mode = "PAY_PER_REQUEST" # No need to provision capacity
+  hash_key     = "LockID"
 
   attribute {
     name = "LockID"
@@ -307,7 +319,7 @@ output "backend_config" {
 
 output "next_steps" {
   description = "Instructions for using this backend"
-  value = <<-EOT
+  value       = <<-EOT
     
     ✅ Backend Setup Complete!
     

@@ -46,7 +46,7 @@ output "application_role_arn" {
 
 output "test_commands" {
   description = "Commands to test access points"
-  value = <<-EOT
+  value       = <<-EOT
     
     Test Commands
     
@@ -73,7 +73,7 @@ output "test_commands" {
 
 output "deployment_summary" {
   description = "Summary of deployed resources"
-  value = <<-EOT
+  value       = <<-EOT
     
     Deployment Summary - Access Points
     

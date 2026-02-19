@@ -223,7 +223,11 @@ private/
 .gitlab-ci-local/
 .github-actions-local/
 
-
+*.json
+!*.tfvars.json.example
+# Or more specifically to avoid blocking other JSON configs:
+tfplan.json
+**/tfplan.json
 
 
 
