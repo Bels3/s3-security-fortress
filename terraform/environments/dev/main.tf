@@ -31,7 +31,7 @@ data "aws_region" "current" {}
 # Phase 1: KMS Encryption
 
 module "kms_master_key" {
-  source = "../../../modules/kms-encryption"
+  source = "../../modules/kms-encryption"
 
   environment     = var.environment
   purpose         = "s3-master"
@@ -57,7 +57,7 @@ module "kms_master_key" {
 # Phase 2: Secure S3 Buckets
 # Standard secure bucket
 module "data_bucket" {
-  source = "../../../modules/secure-s3-bucket"
+  source = "../../modules/secure-s3-bucket"
 
   environment = var.environment
   purpose     = "application-data"
@@ -90,7 +90,7 @@ module "data_bucket" {
 # Phase 3: S3 Access Points
 # Read-only access point
 module "readonly_access_point" {
-  source = "../../../modules/s3-access-points"
+  source = "../../modules/s3-access-points"
 
   environment = var.environment
   purpose     = "readonly"
@@ -112,7 +112,7 @@ module "readonly_access_point" {
 
 # Upload access point
 module "upload_access_point" {
-  source = "../../../modules/s3-access-points"
+  source = "../../modules/s3-access-points"
 
   environment = var.environment
   purpose     = "uploads"
@@ -134,7 +134,7 @@ module "upload_access_point" {
 
 # Phase 4: Object Lock Bucket
 module "compliance_bucket" {
-  source = "../../../modules/object-lock"
+  source = "../../modules/object-lock"
 
   environment = var.environment
   purpose     = "compliance-data"
@@ -169,7 +169,7 @@ module "compliance_bucket" {
 
 # Phase 5: Presigned URL Access (The API Layer)
 module "presigned_access" {
-  source = "../../../modules/presigned-access"
+  source = "../../modules/presigned-access"
 
   environment = var.environment
   bucket_name = module.data_bucket.bucket_id
@@ -187,7 +187,7 @@ module "presigned_access" {
 
 # Phase 6: Monitoring & Compliance
 module "monitoring" {
-  source = "../../../modules/monitoring-compliance"
+  source = "../../modules/monitoring-compliance"
 
   environment = var.environment
 
